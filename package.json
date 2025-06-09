@@ -1,0 +1,19 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "A simple registration and login website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "html",
+    "css",
+    "javascript"
+  ],
+  "author": "İsim",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+} 
