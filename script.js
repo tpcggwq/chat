@@ -215,3 +215,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 }); 
+.mor-outline {
+  outline: 2px solid #800080;
+  outline-offset: 2px;
+  transition: outline 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-register:hover {
+  background-color: #800080;
+  border-color: #800080;
+  color: white;
+}
