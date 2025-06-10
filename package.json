@@ -1,26 +1,4 @@
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "name": "website",
-  "version": "1.0.0",
-  "description": "A simple registration and login website",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "keywords": [
-    "html",
-    "css",
-    "javascript"
-  ],
-  "author": "İsim",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.21.2"
-  }
-=======
-=======
->>>>>>> 2a4679d4991d084bc214187a4d99e30ba34b2a38
   "name": "chat-app",
   "version": "1.0.0",
   "description": "",
@@ -32,8 +10,4 @@
   "keywords": [],
   "author": "",
   "license": "ISC"
-<<<<<<< HEAD
->>>>>>> 2f5dc09 (Mesaj)
-=======
->>>>>>> 2a4679d4991d084bc214187a4d99e30ba34b2a38
 }
