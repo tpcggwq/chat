@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    background-color: #1a1a1a;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 0 25px rgba(138, 43, 226, 0.7), 0 0 50px rgba(138, 43, 226, 0.5);
+}
+
+.logo {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #8a2be2;
+    margin-bottom: 2rem;
+    animation: glitch 4s infinite;
+    text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+    transition: text-shadow 0.3s ease;
+}
+
+.logo:hover {
+    text-shadow: 0 0 15px #8a2be2, 0 0 30px #8a2be2;
+}
+
+.lightning-logo {
+    width: 80px;
+    margin-bottom: 30px;
+}
+
+.invite-button {
+    background-color: #4285F4;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px auto;
+    transition: all 0.3s ease;
+}
+
+.invite-button:hover {
+    box-shadow: 0 0 15px #8a2be2, 0 0 30px #8a2be2;
+}
+
+.invite-button .key-icon {
+    margin-right: 10px;
+}
+
+.input-group {
+    background-color: #333;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.input-group input {
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 12px 0;
+    font-size: 16px;
+    flex-grow: 1;
+    outline: none;
+}
+
+.input-group input::placeholder {
+    color: #bbb;
+}
+
+.domain-input .domain {
+    color: #bbb;
+    margin-right: 5px;
+}
+
+.password-input .eye-icon {
+    color: #bbb;
+    cursor: pointer;
+}
+
+.terms {
+    font-size: 12px;
+    color: #bbb;
+    margin-top: 20px;
+}
+
+.terms a {
+    color: #4285F4;
+    text-decoration: none;
+}
+
+.register-button {
+    background-color: #e07b39;
+    color: white;
+    border: none;
+    padding: 12px 50px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.register-button:hover {
+    box-shadow: 0 0 15px #8a2be2, 0 0 30px #8a2be2;
+}
+
+.login-link, .register-link {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.login-link a, .register-link a {
+    color: #4285F4;
+    text-decoration: none;
+}
+
+.purple-text {
+    color: black;
+}
+
+.gray-text {
+    color: #A9A9A9;
+}
+
+.rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.rain-drop {
+    position: absolute;
+    background-color: rgba(138, 43, 226, 0.5);
+    width: 2px;
+    height: 15px;
+    border-radius: 50%;
+    animation: rain-fall linear infinite;
+}
+
+@keyframes rain-fall {
+    0% {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+
+.lightning-bolt {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    animation: lightning-flash 0.3s ease-out forwards;
+}
+
+.lightning-bolt-segment {
+    position: absolute;
+    background-color: rgba(138, 43, 226, 0.8);
+    filter: blur(5px);
+    border-radius: 2px;
+}
+
+@keyframes lightning-flash {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes lightning-glow {
+    0% { box-shadow: 0 0 5px rgba(138, 43, 226, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(138, 43, 226, 0.8), 0 0 30px rgba(138, 43, 226, 0.6); }
+    100% { box-shadow: 0 0 5px rgba(138, 43, 226, 0.5); }
+}
+
+.glow-effect {
+    animation: lightning-glow 0.8s ease-in-out;
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0, 0);
+        text-shadow: 0 0 0 transparent;
+        filter: blur(0px);
+    }
+    12.5% {
+        transform: translate(60px, 0px);
+        text-shadow: 0 0 0 #8a2be2, 0 0 0 #1a1a1a,
+                     -40px 0px 5px rgba(138, 43, 226, 0.9), -40px 0px 5px rgba(26, 26, 26, 0.9),
+                     -80px 0px 10px rgba(138, 43, 226, 0.7), -80px 0px 10px rgba(26, 26, 26, 0.7);
+        filter: blur(0px);
+    }
+    25% {
+        transform: translate(0px, 35px);
+        text-shadow: 0 0 0 #8a2be2, 0 0 0 #1a1a1a,
+                     0px -40px 5px rgba(138, 43, 226, 0.9), 0px -40px 5px rgba(26, 26, 26, 0.9),
+                     0px -80px 10px rgba(138, 43, 226, 0.7), 0px -80px 10px rgba(26, 26, 26, 0.7);
+        filter: blur(0px);
+    }
+    37.5% {
+        transform: translate(-60px, 0px);
+        text-shadow: 0 0 0 #8a2be2, 0 0 0 #1a1a1a,
+                     40px 0px 5px rgba(138, 43, 226, 0.9), 40px 0px 5px rgba(26, 26, 26, 0.9),
+                     80px 0px 10px rgba(138, 43, 226, 0.7), 80px 0px 10px rgba(26, 26, 26, 0.7);
+        filter: blur(0px);
+    }
+    50% {
+        transform: translate(0, -35px);
+        text-shadow: 0 0 0 #8a2be2, 0 0 0 #1a1a1a,
+                     0px 40px 5px rgba(138, 43, 226, 0.9), 0px 40px 5px rgba(26, 26, 26, 0.9),
+                     0px 80px 10px rgba(138, 43, 226, 0.7), 0px 80px 10px rgba(26, 26, 26, 0.7);
+        filter: blur(0px);
+    }
+    62.5% {
+        transform: translate(60px, 0px);
+        text-shadow: 0 0 0 #8a2be2, 0 0 0 #1a1a1a,
+                     -40px 0px 5px rgba(138, 43, 226, 0.9), -40px 0px 5px rgba(26, 26, 26, 0.9),
+                     -80px 0px 10px rgba(138, 43, 226, 0.7), -80px 0px 10px rgba(26, 26, 26, 0.7);
+        filter: blur(0px);
+    }
+    75% {
+        transform: translate(0px, 35px);
+        text-shadow: 0 0 0 #8a2be2, 0 0 0 #1a1a1a,
+                     0px -40px 5px rgba(138, 43, 226, 0.9), 0px -40px 5px rgba(26, 26, 26, 0.9),
+                     0px -80px 10px rgba(138, 43, 226, 0.7), 0px -80px 10px rgba(26, 26, 26, 0.7);
+        filter: blur(0px);
+    }
+    87.5% {
+        transform: translate(-60px, 0px);
+        text-shadow: 0 0 0 #8a2be2, 0 0 0 #1a1a1a,
+                     40px 0px 5px rgba(138, 43, 226, 0.9), 40px 0px 5px rgba(26, 26, 26, 0.9),
+                     80px 0px 10px rgba(138, 43, 226, 0.7), 80px 0px 10px rgba(26, 26, 26, 0.7);
+        filter: blur(0px);
+    }
+    100% {
+        transform: translate(0, 0);
+        text-shadow: 0 0 0 transparent;
+        filter: blur(0px);
+    }
+}
+
+.btn-primary:hover,
+.btn-register:hover {
+  background-color: #800080; /* mor */
+  border-color: #800080;
+  color: white;
+}
+
+.mor-outline {
+  outline: 2px solid #800080;
+  outline-offset: 2px;
+}
+
+.input-group.error {
+    border: 1px solid red;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    text-align: left;
+}
