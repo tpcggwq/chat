@@ -232,4 +232,14 @@ body {
         transform: translate(0, 0);
         text-shadow: 0 0 0 transparent;
     }
-}
+    }
+    .btn-primary:hover,
+    .btn-register:hover {
+      background-color: #800080; /* mor */
+      border-color: #800080;
+      color: white;
+    }
+    .mor-outline {
+      outline: 2px solid #800080;
+      outline-offset: 2px;
+    }
