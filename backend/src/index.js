@@ -3,40 +3,61 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
-import path from "path";
+import path from "path"; // 'path' modülünü import etmek gerekli
 
-import { connectDB } from "./lib/db.js";
-
+import { connectDB } from "./lib/db.js"; // MongoDB bağlantı fonksiyonunuz
+// authRoutes ve messageRoutes gibi diğer rotalarınız
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
-import { app, server } from "./lib/socket.js";
+// Socket.IO için app ve server'ı dışa aktaran socket.js dosyanız
+import { app, server } from "./lib/socket.js"; 
 
-dotenv.config();
+dotenv.config(); // .env dosyasındaki ortam değişkenlerini yükler
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT; // Ortam değişkenlerinden portu alır
+// __dirname, ES Modülleri'nde doğrudan bulunmadığı için path.resolve() kullanarak tanımlanır.
 const __dirname = path.resolve();
 
-app.use(express.json());
-app.use(cookieParser());
+app.use(express.json()); // Gelen JSON istek gövdelerini ayrıştırır
+app.use(cookieParser()); // Gelen cookie'leri ayrıştırır
+
+// CORS (Cross-Origin Resource Sharing) ayarı:
+// Eğer frontend ve backend farklı domain'lerde (veya portlarda) çalıştığında gereklidir.
+// Geliştirme için "http://localhost:5173" kullanıyorduk.
+// Canlıda, eğer frontend de Render'da aynı URL üzerinden erişiliyorsa,
+// veya farklı bir alt domain'de ise, burayı doğru ayarlamanız önemlidir.
+// Şimdilik test ve genel erişim için "*" olarak ayarlandı.
+// GÜVENLİK NOTU: Üretim ortamında "*" yerine frontend'inizin gerçek URL'sini kullanmanız şiddetle önerilir.
 app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  })
+    cors({
+        origin: "*", // Geçici olarak tüm originlere izin verir. Üretim için DEĞİŞTİRİN!
+        credentials: true, // Cookie'lerin cross-origin isteklerle gönderilmesini sağlar
+    })
 );
 
+// API Rotaları - Bu rotalar '/api/' ön eki ile başlar
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
+// Üretim Ortamında Frontend Dosyalarını Sunma Bloğu:
+// Bu blok, sadece 'NODE_ENV' ortam değişkeni "production" olduğunda çalışır.
+// Render.com'da, uygulamanızın ortam değişkenlerinde NODE_ENV'i "production" olarak ayarladığınızdan emin olun.
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+    // Frontend'in derlenmiş statik dosyalarını sunar.
+    // Bu dosyalar genellikle `frontend` klasörünün içindeki `dist` klasöründe bulunur
+    // (Örn: projenizin kökünde `frontend/dist`).
+    app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-  });
+    // Tek Sayfalık Uygulamalar (SPA) için tüm diğer GET isteklerini yakalar.
+    // '/api' ile başlamayan tüm istekleri frontend'in ana HTML dosyasına yönlendirir.
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+    });
 }
 
+// Sunucuyu başlatma
+// 'app.listen' yerine 'server.listen' kullanılması Socket.IO ile uyumluluk içindir.
 server.listen(PORT, () => {
-  console.log("server is running on PORT:" + PORT);
-  connectDB();
+    console.log("server is running on PORT:" + PORT);
+    connectDB(); // MongoDB veritabanı bağlantısını başlatır
 });
