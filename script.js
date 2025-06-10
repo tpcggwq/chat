@@ -132,6 +132,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // New functions for input error handling
+    function displayInputError(inputElement, message) {
+        const inputGroup = inputElement.closest('.input-group');
+        if (inputGroup) {
+            inputGroup.classList.add('error');
+            let errorMessageElement = inputGroup.querySelector('.error-message');
+            if (!errorMessageElement) {
+                errorMessageElement = document.createElement('div');
+                errorMessageElement.classList.add('error-message');
+                inputGroup.appendChild(errorMessageElement);
+            }
+            errorMessageElement.textContent = message;
+        }
+    }
+
+    function clearInputError(inputElement) {
+        const inputGroup = inputElement.closest('.input-group');
+        if (inputGroup) {
+            inputGroup.classList.remove('error');
+            const errorMessageElement = inputGroup.querySelector('.error-message');
+            if (errorMessageElement) {
+                errorMessageElement.remove();
+            }
+        }
+    }
+
     eyeIcons.forEach(icon => {
         icon.addEventListener('click', () => {
             const passwordInput = icon.previousElementSibling;
@@ -161,57 +187,95 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (loginForm) {
         loginForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default submission initially to handle validation
+            let isValid = true;
+
             const emailInput = loginForm.querySelector('input[type="email"]');
             const passwordInput = loginForm.querySelector('input[type="password"]');
 
             if (emailInput.value.trim() === '') {
-                event.preventDefault();
-                return;
-            }
-            
-            if (passwordInput.value.trim() === '') {
-                event.preventDefault();
-                return; // Silently return if password is empty
+                displayInputError(emailInput, 'E-posta boş bırakılamaz!');
+                isValid = false;
+            } else {
+                clearInputError(emailInput);
             }
 
-            // Only prevent default if we're not submitting
             if (passwordInput.value.trim() === '') {
-                event.preventDefault();
+                displayInputError(passwordInput, 'Şifre boş bırakılamaz!');
+                isValid = false;
+            } else {
+                clearInputError(passwordInput);
             }
+
+            if (isValid) {
+                // If form is valid, proceed with submission (e.g., loginForm.submit() or AJAX)
+                console.log('Login form submitted successfully!');
+                // In a real application, you would send data to the server here.
+                // For demonstration, we'll just log.
+            }
+        });
+
+        // Add input event listeners to clear errors as user types
+        const loginInputs = loginForm.querySelectorAll('input');
+        loginInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                clearInputError(input);
+            });
         });
     }
 
     if (registerForm) {
         registerForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default submission initially to handle validation
+            let isValid = true;
+
             const nameInput = registerForm.querySelector('input[type="text"]');
             const emailInput = registerForm.querySelector('input[type="email"]');
             const passwordInput = registerForm.querySelector('input[type="password"]');
             const inviteInput = registerForm.querySelector('input[placeholder="Invite"]');
 
             if (nameInput.value.trim() === '') {
-                event.preventDefault();
-                return;
-            }
-            
-            if (emailInput.value.trim() === '') {
-                event.preventDefault();
-                return;
-            }
-            
-            if (passwordInput.value.trim() === '') {
-                event.preventDefault();
-                return; // Silently return if password is empty
-            }
-            
-            if (inviteInput.value.trim() === '') {
-                event.preventDefault();
-                return;
+                displayInputError(nameInput, 'Ad boş bırakılamaz!');
+                isValid = false;
+            } else {
+                clearInputError(nameInput);
             }
 
-            // Apply glow effect and log if all fields are filled and valid
-            applyGlowEffect(container);
-            console.log('Register form: Fields are filled, applying glow.');
-            // Here you would typically handle the registration process
+            if (emailInput.value.trim() === '') {
+                displayInputError(emailInput, 'E-posta boş bırakılamaz!');
+                isValid = false;
+            } else {
+                clearInputError(emailInput);
+            }
+
+            if (passwordInput.value.trim() === '') {
+                displayInputError(passwordInput, 'Şifre boş bırakılamaz!');
+                isValid = false;
+            } else {
+                clearInputError(passwordInput);
+            }
+
+            if (inviteInput.value.trim() === '') {
+                displayInputError(inviteInput, 'Davetiye kodu boş bırakılamaz!');
+                isValid = false;
+            } else {
+                clearInputError(inviteInput);
+            }
+
+            if (isValid) {
+                // Apply glow effect and log if all fields are filled and valid
+                applyGlowEffect(container);
+                console.log('Register form: Fields are filled, applying glow and submitting.');
+                // Here you would typically handle the registration process
+            }
+        });
+
+        // Add input event listeners to clear errors as user types
+        const registerInputs = registerForm.querySelectorAll('input');
+        registerInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                clearInputError(input);
+            });
         });
     }
 }); 
